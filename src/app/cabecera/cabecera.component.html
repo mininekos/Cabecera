@@ -1,6 +1,7 @@
-<a class="btn btn-secondary"> Cambiar Angular </a>
-<a class="btn btn-secondary"> Cambiar JS </a>
-<a class="btn btn-secondary"> Ocultar </a>
-<ng-content select =".Angular"></ng-content>
-
-<ng-content select =".JS"></ng-content>
+<a class="btn btn-secondary" (click)="CambioAngular()"> Cambiar Angular </a>
+<a class="btn btn-secondary" (click)="CambioJS()"> Cambiar JS </a>
+<a class="btn btn-secondary" (click)="CambioEstado()"> Ocultar </a>
+<p></p>
+<!-- <img *ngIf="expression" src="../assets/Img/clank.png"> -->
+<img *ngIf="estado" #ImagenAngular src={{imagenBase}}>
+<img *ngIf="estado" #ImagenJS src="../assets/Img/clank.png">
