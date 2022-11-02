@@ -1,1 +1,7 @@
-<app-cabecera></app-cabecera>
+<app-cabecera (CambioAngular)="hacerCambioAngular($event)"
+(CambioJS)="hacerCambioJS($event)"
+(CambioEstado)="hacerCambioEstado($event)"
+>
+    <img *ngIf="estado" #ImagenAngular [src]='imagenBase'>
+    <img *ngIf="estado" #ImagenJS src="../assets/Img/clank.png">
+</app-cabecera>

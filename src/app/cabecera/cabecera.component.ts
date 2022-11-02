@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-cabecera',
@@ -7,45 +7,46 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class CabeceraComponent implements OnInit {
 
-  public imagenBase: String
-  public estado: Boolean
-  public cambioAngular: Boolean
-  public cambioJS: Boolean
-  @ViewChild('ImagenJS') imgJS!: ElementRef;
+  
+  @Output() CambioAngular = new EventEmitter<String>();
+  @Output() CambioJS = new EventEmitter<String>();
+  @Output() CambioEstado = new EventEmitter<Boolean>();
+  estadoImagenAngular:Boolean
+  estadoImagenJS:Boolean
+  estado: Boolean;
   constructor() { 
-    this.imagenBase="../assets/Img/clank.png";
+    this.estadoImagenAngular=true;
+    this.estadoImagenJS=true;
     this.estado=true;
-    this.cambioAngular=true;
-    this.cambioJS=true;
   }
 
   ngOnInit(): void {
   }
 
-  CambioAngular() {
-    if(this.cambioAngular==true){
-      this.imagenBase="../assets/Img/ratchet.png";
-      this.cambioAngular=false;
+  CambiarAngular() {
+    if(this.estadoImagenAngular==true){
+      this.CambioAngular.emit("../assets/Img/ratchet.png");
+      this.estadoImagenAngular=false;
     }
     else{
-      this.imagenBase="../assets/Img/clank.png";
-      this.cambioAngular=true;
+      this.CambioAngular.emit("../assets/Img/clank.png");
+      this.estadoImagenAngular=true;
     }
   }
 
-  CambioJS() {
-    this.imgJS.nativeElement.src="../assets/Img/ratchet.png";
-    if(this.cambioJS==true){
-      this.imgJS.nativeElement.src="../assets/Img/ratchet.png";
-      this.cambioJS=false;
+  CambiarJS() {
+    if(this.estadoImagenJS==true){
+      this.CambioJS.emit("../assets/Img/ratchet.png");
+      this.estadoImagenJS=false;
     }
     else{
-      this.imgJS.nativeElement.src="../assets/Img/clank.png";
-      this.cambioJS=true;
+      this.CambioJS.emit("../assets/Img/clank.png");
+      this.estadoImagenJS=true;
     }
   }
 
-  CambioEstado(){
+  CambiarEstado(){
     this.estado=!this.estado;
+    this.CambioEstado.emit(this.estado);
   }
 }
